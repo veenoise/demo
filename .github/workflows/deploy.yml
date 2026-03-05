@@ -43,6 +43,7 @@ jobs:
         with:
           secret-ids: |
             william/demo/dev
+            VITE_DEMO, VITE_DEMO
           parse-json-secrets: true
           name-transformation: none
       - name: Print env
