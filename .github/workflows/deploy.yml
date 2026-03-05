@@ -44,6 +44,8 @@ jobs:
           secret-ids: |
             william/demo/dev
           parse-json-secrets: true
+      - name: Print env
+        run: env
 
       - name: Set up Node
         uses: actions/setup-node@v6
