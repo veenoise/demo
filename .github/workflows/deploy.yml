@@ -44,6 +44,7 @@ jobs:
           secret-ids: |
             william/demo/dev
           parse-json-secrets: true
+          name-transformation: none
       - name: Print env
         run: env
 
