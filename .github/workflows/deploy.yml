@@ -42,7 +42,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v2
         with:
           secret-ids: |
-            VITE_DEMO, william/demo/dev
+            , william/demo/dev
           parse-json-secrets: true
           name-transformation: none
       - name: Print env
