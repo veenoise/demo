@@ -1,0 +1,28 @@
+name: Scan Table Output
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  trivy:
+    name: Trivy
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read # Required to checkout and read repo files
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: true # Do not fail on vulnerabilities with no known patch
+          scanners: "vuln" # Scan packages only
+          severity: "HIGH,CRITICAL"
