@@ -19,6 +19,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.33.1
         with:
+          token-setup-trivy: ${{ secrets.GH_PAT }}
           scan-type: "fs"
           scan-ref: "."
           format: "table"
