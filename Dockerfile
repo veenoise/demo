@@ -1,4 +1,5 @@
-FROM node:26-alpine AS builder
+# lts-alpine / linux/amd64
+FROM node@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14 AS builder
 WORKDIR /app
 
 # 1. Copy package files first to leverage Docker caching
@@ -11,13 +12,12 @@ COPY . .
 # 3. Run the build
 RUN npm run build
 
-FROM nginx:1.31.1-alpine
+# 1.31-alpine-perl / linux/amd64
+FROM nginxinc/nginx-unprivileged@sha256:26aa15426f018100219de75eab73e61cd0d4b28d62816e0ce590704a3967c629
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
+EXPOSE 8080
 
 # This is the correct CMD for Nginx. It starts the web server 
 # and keeps it running in the foreground so the container doesn't exit.
